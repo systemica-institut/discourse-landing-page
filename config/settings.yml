@@ -1,3 +1,3 @@
 plugins:
-  name_enabled:
+  discourse_landing_page_enabled:
     default: false

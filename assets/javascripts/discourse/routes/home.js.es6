@@ -6,6 +6,6 @@ import DiscourseRoute from 'discourse/routes/discourse';
 export default DiscourseRoute.extend({
   renderTemplate() {
     // Renders the template `../templates/name.hbs`
-    this.render('name');
+    this.render('home');
   }
 });

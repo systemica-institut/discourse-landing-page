@@ -1,8 +1,8 @@
 vi:
   js:
     discourse_landing_page:
-      title: "Willkommen bei Meta"
-      description: "Systemisch erleben, Netzwerken, Neues kreieren und gemeinsam im Team wachsen."
+      title: 'Willkommen bei Meta'
+      description: 'Systemisch erleben, Netzwerken, Neues kreieren und gemeinsam im Team wachsen.'
       copyright: "SSL verschlüsselt - © Systemica Institut GmbH. Alle Rechte vorbehalten."
       footer_text_1: "Institut"
       footer_text_2: "Ambulanz"

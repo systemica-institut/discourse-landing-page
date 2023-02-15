@@ -4,5 +4,5 @@
  */
 
 export default function () {
-    this.route('name', { path: '/name' })
+    this.route('home', { path: '/home' })
 }
