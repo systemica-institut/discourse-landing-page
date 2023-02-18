@@ -16,6 +16,16 @@ export default {
                     this.render('login');
                 }
             })
+            
+            api.modifyClass('route:signup', {
+                pluginId: PLUGIN_ID,
+                beforeModel() {
+                    // do nothing
+                },
+                renderTemplate() {
+                    this.render('create-account');
+                }
+            })
         });
     }
 }
