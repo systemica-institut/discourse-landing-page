@@ -24,7 +24,14 @@
         color: #363f4a;
       }
 
+      .description-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
       .description {
+        max-width: 550px;
         font-style: normal;
         font-weight: 400;
         font-size: 18px;
