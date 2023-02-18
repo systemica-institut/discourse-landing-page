@@ -6,10 +6,14 @@
         <div class="header">{{ i18n 'login.title' }}</div>
         <form id="login-form" method="post">
             <div id="credentials" class={{this.credentialsClass}}>
-                <Input @value={{this.loginName}} @type="email" id="login-account-name" class={{value-entered
-                    this.loginName}} autocomplete="username" autocorrect="off" autocapitalize="off"
-                    disabled={{this.showSecondFactor}} autofocus="autofocus" tabindex="1"
-                    placeholder={{i18n "login.email_placeholder" }} />
+                <div class="input-group">
+                    <Input @value={{this.loginName}} @type="email" id="login-account-name" class={{value-entered
+                        this.loginName}} autocomplete="username" autocorrect="off" autocapitalize="off"
+                        disabled={{this.showSecondFactor}} autofocus="autofocus" tabindex="1" />
+                    <label class="alt-placeholder" for="login-account-name">{{i18n
+                        "login.email_placeholder"
+                        }}</label>
+                </div>
 
                 {{!-- {{#if this.showLoginWithEmailLink}}
                 <a href class={{if this.loginName "" "no-login-filled" }} tabindex="3" id="email-login-link"
@@ -17,18 +21,24 @@
                     {{i18n "email_login.login_link"}}
                 </a>
                 {{/if}} --}}
-                <PasswordField @value={{this.loginPassword}} @type={{if this.maskPassword "password" "text" }}
-                    class={{value-entered this.loginPassword}} id="login-account-password"
-                    autocomplete="current-password" maxlength="200" @capsLockOn={{this.capsLockOn}}
-                    disabled={{this.disableLoginFields}} tabindex="1" placeholder={{i18n "login.password" }} />
-                <div class="login__password-links">
-                    <a href id="forgot-password-link" tabindex="3" {{on "click" this.handleForgotPassword}}>{{i18n
-                        "user.second_factor.forgot_password"}}</a>
-                    {{!-- <TogglePasswordMask @maskPassword={{this.maskPassword}}
-                        @togglePasswordMask={{this.togglePasswordMask}} tabindex="3" /> --}}
+                <div class="input-group">
+                    <PasswordField @value={{this.loginPassword}} @type={{if this.maskPassword "password" "text" }}
+                        class={{value-entered this.loginPassword}} id="login-account-password"
+                        autocomplete="current-password" maxlength="200" @capsLockOn={{this.capsLockOn}}
+                        disabled={{this.disableLoginFields}} tabindex="1" />
+                    <label class="alt-placeholder" for="login-account-password">{{i18n
+                        "login.password"
+                        }}</label>
+                    <div class="login__password-links">
+                        <a href id="forgot-password-link" tabindex="3" {{on "click" this.handleForgotPassword}}>{{i18n
+                            "user.second_factor.forgot_password"}}</a>
+                        {{!--
+                        <TogglePasswordMask @maskPassword={{this.maskPassword}}
+                            @togglePasswordMask={{this.togglePasswordMask}} tabindex="3" /> --}}
+                    </div>
+                    <div class="caps-lock-warning {{unless this.capsLockOn 'hidden'}}">{{d-icon "exclamation-triangle"}}
+                        {{i18n "login.caps_lock_warning"}}</div>
                 </div>
-                <div class="caps-lock-warning {{unless this.capsLockOn 'hidden'}}">{{d-icon "exclamation-triangle"}}
-                    {{i18n "login.caps_lock_warning"}}</div>
             </div>
             {{!-- <SecondFactorForm @secondFactorMethod={{this.secondFactorMethod}}
                 @secondFactorToken={{this.secondFactorToken}} @class={{this.secondFactorClass}}
@@ -46,9 +56,8 @@
         </form>
         {{#if this.canLoginLocal}}
         {{#unless this.showSecurityKey}}
-        <DButton @action={{action "login" }} @id="login-button" @form="login-form"
-            @label={{this.loginButtonLabel}} @disabled={{this.loginDisabled}} @class="btn btn-large btn-primary"
-            @tabindex="2" />
+        <DButton @action={{action "login" }} @id="login-button" @form="login-form" @label={{this.loginButtonLabel}}
+            @disabled={{this.loginDisabled}} @class="btn btn-large btn-primary" @tabindex="2" />
         {{/unless}}
         {{/if}}
         <ConditionalLoadingSpinner @condition={{this.showSpinner}} @size="small" />

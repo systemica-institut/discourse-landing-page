@@ -158,26 +158,76 @@
         justify-content: center;
         align-items: center;
 
-        .login__password-links {
-          align-self: flex-end;
-
-          a {
-            font-style: normal;
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 26px;
-            /* identical to box height, or 144% */
-
-            color: #8e959d;
-          }
-        }
-
-        input {
+        .input-group {
           width: 100%;
-          height: 56px;
-          background: #ffffff;
-          border: 1px solid #8e959d;
-          border-radius: 4px;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 1.4em;
+        
+          .login__password-links {
+            align-self: flex-end;
+  
+            a {
+              font-style: normal;
+              font-weight: 400;
+              font-size: 18px;
+              line-height: 26px;
+              /* identical to box height, or 144% */
+  
+              color: #8e959d;
+            }
+          }
+  
+          input {
+            width: 100%;
+            height: 56px;
+            background: #ffffff;
+            border: 1px solid #8e959d;
+            border-radius: 4px;
+          }
+
+          input:not(.value-entered):not(:focus) + label.alt-placeholder {
+            top: 18px;
+            left: 1em;
+          }
+  
+          input:focus + label.alt-placeholder {
+            top: -8px;
+            left: 1em;
+            background-color: var(--secondary);
+            padding: 0 0.25em 0 0.25em;
+            font-size: var(--font-down-1);
+          }
+  
+          input.value-entered + label.alt-placeholder {
+            top: -8px;
+            left: 1em;
+            background-color: var(--secondary);
+            padding: 0 0.25em 0 0.25em;
+            font-size: var(--font-down-1);
+          }
+  
+          label.alt-placeholder {
+            color: var(--primary-medium);
+            font-size: 16px;
+            font-weight: normal;
+            position: absolute;
+            pointer-events: none;
+            box-shadow: 0 0 0 0px rgba(var(--tertiary-rgb), 0);
+            left: 1em;
+            top: -10px;
+            transition: 0.2s ease all;
+            -moz-transition: 0.2s ease all; /* Firefox 4 */
+            -webkit-transition: 0.2s ease all; /* Safari and Chrome */
+            -o-transition: 0.2s ease all; /* Opera */
+            -ms-transition: 0.2s ease all; /* Explorer 10 */
+  
+            line-height: var(--line-height-medium);
+            display: flex;
+            margin-bottom: 5px;
+            align-items: flex-start;
+          }
         }
       }
     }
