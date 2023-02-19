@@ -1,5 +1,5 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-import { helperContext } from "discourse-common/lib/helpers";
+import { schedule, next } from "@ember/runloop";
 
 const PLUGIN_ID = "Discourse-landing-page";
 
@@ -15,9 +15,14 @@ export default {
                 },
                 renderTemplate() {
                     this.render('login');
+                },
+                afterModel(model, transition) {
+                    schedule("afterRender", () => {
+                        next(() => window.scrollTo(0, 0));
+                    });
                 }
             })
-            
+
             api.modifyClass('route:signup', {
                 pluginId: PLUGIN_ID,
                 showFooter: true,
@@ -26,6 +31,11 @@ export default {
                 },
                 renderTemplate() {
                     this.render('create-account');
+                },
+                afterModel(model, transition) {
+                    schedule("afterRender", () => {
+                        next(() => window.scrollTo(0, 0));
+                    });
                 }
             })
         });
