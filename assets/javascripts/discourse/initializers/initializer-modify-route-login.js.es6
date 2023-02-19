@@ -9,6 +9,7 @@ export default {
         withPluginApi("0.11.0", api => {
             api.modifyClass('route:login', {
                 pluginId: PLUGIN_ID,
+                showFooter: true,
                 beforeModel() {
                     // do nothing
                 },
@@ -19,6 +20,7 @@ export default {
             
             api.modifyClass('route:signup', {
                 pluginId: PLUGIN_ID,
+                showFooter: true,
                 beforeModel() {
                     // do nothing
                 },

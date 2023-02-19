@@ -12,8 +12,11 @@
 
     .content {
       padding: 60px 0;
+      padding-bottom: calc(60px - 1.5em);
 
       .title {
+        margin-bottom: 16px;
+
         font-family: "MetropolisNF";
         font-style: normal;
         font-weight: 700;
@@ -28,17 +31,17 @@
         width: 100%;
         display: flex;
         justify-content: center;
-      }
 
-      .description {
-        max-width: 550px;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 26px;
-        /* or 144% */
-
-        color: #6f7680;
+        .description {
+          max-width: 550px;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 26px;
+          /* or 144% */
+  
+          color: #6f7680;
+        }
       }
 
       .header-link-container {
@@ -61,44 +64,6 @@
     width: 100%;
     margin: 40px 0;
     background-color: #f8f8f8;
-  }
-
-  #landing-page-footer {
-    width: 100%;
-    background-color: #f8f8f8;
-
-    .content {
-      padding: 32px 0;
-      border-top: 1px solid #d6d8dc;
-
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 190px;
-
-      .footer-text {
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 20px;
-        /* identical to box height, or 143% */
-
-        color: #8e959d;
-      }
-
-      #left-side,
-      #right-side {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-      }
-
-      #right-side {
-        gap: 24px;
-      }
-    }
   }
 
   .description,
