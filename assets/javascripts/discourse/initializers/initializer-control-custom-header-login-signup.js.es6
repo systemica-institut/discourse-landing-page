@@ -7,8 +7,7 @@ export default {
     name: "initializer-control-custom-header-login-signup",
     initialize(container) {
         withPluginApi("0.11.0", api => {
-            let appEvents = container.lookup('service:app-events');
-            appEvents.on('page:changed', data => {
+            api.onAppEvent("page:changed", (data) => {
                 if (data.currentRouteName == "login"
                     || data.currentRouteName == "signup"
                     || data.currentRouteName == "home"
