@@ -1,5 +1,6 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 import { schedule, next } from "@ember/runloop";
+import { defaultHomepage } from "discourse/lib/utilities";
 
 const PLUGIN_ID = "Discourse-landing-page";
 
@@ -11,7 +12,9 @@ export default {
                 pluginId: PLUGIN_ID,
                 showFooter: true,
                 beforeModel() {
-                    // do nothing
+                    if (this.currentUser) {
+                        this.replaceWith(`/${defaultHomepage()}`);
+                    }
                 },
                 renderTemplate() {
                     this.render('login');
@@ -27,7 +30,9 @@ export default {
                 pluginId: PLUGIN_ID,
                 showFooter: true,
                 beforeModel() {
-                    // do nothing
+                    if (this.currentUser) {
+                        this.replaceWith(`/${defaultHomepage()}`);
+                    }
                 },
                 renderTemplate() {
                     this.render('create-account');
