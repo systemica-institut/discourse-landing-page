@@ -47,15 +47,24 @@
       .header-link-container {
         gap: 32px;
 
-        p {
-          font-style: normal;
-          font-weight: 500;
-          font-size: 18px;
-          line-height: 22px;
-          /* identical to box height */
-
-          color: #005859;
+        .header-link {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-self: center;
+          gap: 8px;
+          
+          p {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+            /* identical to box height */
+  
+            color: #005859;
+          }
         }
+
       }
     }
   }
