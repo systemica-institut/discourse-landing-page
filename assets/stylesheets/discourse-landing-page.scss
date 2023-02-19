@@ -1,3 +1,12 @@
+.mobile-view .landing-page {
+  #landing-page-header {
+    .content {
+      padding: 40px 10px;
+      padding-bottom: calc(40px - 1.25em);
+    }
+  }
+}
+
 .landing-page {
   width: 100%;
   display: flex;
@@ -53,7 +62,7 @@
           justify-content: center;
           align-self: center;
           gap: 8px;
-          
+
           p {
             font-style: normal;
             font-weight: 500;
@@ -78,6 +87,14 @@
   .description,
   p {
     font-family: "Inter", sans-serif !important;
+  }
+}
+
+.mobile-view .landing-page-login-wrapper {
+  padding: 40px 0;
+  
+  .login-side {
+    width: 80%;
   }
 }
 
@@ -219,6 +236,14 @@
     .spinner {
       margin: 8px 0;
     }
+  }
+}
+
+.mobile-view .landing-page-signup-wrapper {
+  padding: 40px 0;
+
+  .create-account-body {
+    width: 80%;
   }
 }
 
