@@ -11,6 +11,7 @@ export default {
                 if (data.currentRouteName == "login"
                     || data.currentRouteName == "signup"
                     || data.currentRouteName == "home"
+                    || data.currentRouteName == "forgot-password"
                 ) {
                     $(".below-site-header-outlet .custom-header-login-signup").show();
                 } else {

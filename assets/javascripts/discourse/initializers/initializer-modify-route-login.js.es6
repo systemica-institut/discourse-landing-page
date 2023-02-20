@@ -45,9 +45,37 @@ export default {
                 }
             })
 
+            api.modifyClass('route:forgot-password', {
+                pluginId: PLUGIN_ID,
+                showFooter: true,
+                beforeModel() {
+                    if (this.currentUser) {
+                        this.replaceWith(`/${defaultHomepage()}`);
+                    }
+                },
+                renderTemplate() {
+                    this.render('forgot-password');
+                },
+                afterModel(model, transition) {
+                    schedule("afterRender", () => {
+                        next(() => window.scrollTo(0, 0));
+                    });
+                }
+            })
+
             api.modifyClass('controller:login', {
                 pluginId: PLUGIN_ID,
                 showLoginForm: false,
+
+                @action
+                handleForgotPassword(event) {
+                    event?.preventDefault();
+                    const forgotPasswordController = this.forgotPassword;
+                    if (forgotPasswordController) {
+                        forgotPasswordController.set("accountEmailOrUsername", this.loginName);
+                    }
+                    DiscourseURL.routeTo(`/password-reset`);
+                },
             })
         });
     }
