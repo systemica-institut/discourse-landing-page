@@ -1,6 +1,7 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 import { schedule, next } from "@ember/runloop";
 import { defaultHomepage } from "discourse/lib/utilities";
+import DiscourseURL from "discourse/lib/url";
 import { action } from "@ember/object";
 
 const PLUGIN_ID = "Discourse-landing-page";
