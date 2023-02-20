@@ -64,6 +64,23 @@ export default {
                 }
             })
 
+            api.modifyClass('route:application', {
+                pluginId: PLUGIN_ID,
+
+                handleShowLogin() {
+                    console.log("click login button 2");
+                    if (this.siteSettings.enable_discourse_connect) {
+                        const returnPath = encodeURIComponent(window.location.pathname);
+                        window.location = getURL("/session/sso?return_path=" + returnPath);
+                    } else {
+                        DiscourseURL.routeTo(`/login`);
+                        this.controllerFor("login").setProperties({
+                            showLoginForm: true,
+                        });
+                    }
+                },
+            })
+
             api.modifyClass('controller:login', {
                 pluginId: PLUGIN_ID,
                 showLoginForm: false,
