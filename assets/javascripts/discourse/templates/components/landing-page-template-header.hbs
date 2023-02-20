@@ -6,7 +6,7 @@
                 <div class="text-center description">{{ i18n 'discourse_landing_page.description' }}</div>
             </div>
             <div class="flex-row header-link-container">
-                <a href="/login" class="header-link">
+                <a href="/login" {{on "click" this.showLoginForm}} class="header-link">
                     <p>{{ i18n 'login.title' }}</p>
                     <img src="/plugins/discourse-landing-page/images/chevron-right.svg">
                 </a>

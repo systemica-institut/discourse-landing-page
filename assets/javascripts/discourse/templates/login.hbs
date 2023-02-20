@@ -1,3 +1,4 @@
+{{#if this.showLoginForm}}
 <div class="landing-page-login-wrapper">
     <PluginOutlet @name="login-before-modal-body" @connectorTagName="div" />
     {{#if this.canLoginLocal}}
@@ -65,4 +66,5 @@
     <PluginOutlet @name="login-after-modal-footer" @connectorTagName="div" />
     <div class={{this.alertClass}} id="login-alert">{{this.alert}}</div>
 </div>
+{{/if}}
 <LandingPageTemplateMiddle />
