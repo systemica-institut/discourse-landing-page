@@ -6,6 +6,7 @@ export default {
         withPluginApi("0.11.0", api => {
             api.replaceIcon("user", "lp-icon-user");
             api.replaceIcon("comment", "lp-icon-comment-dots");
+            api.replaceIcon("search", "lp-icon-search");
         });
     }
 }
