@@ -1,5 +1,4 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-import { getOwner } from "discourse-common/lib/get-owner";
 
 const { iconNode } = require("discourse-common/lib/icon-library");
 
