@@ -1,99 +1,99 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-import { schedule, next } from "@ember/runloop";
+import { next, schedule } from "@ember/runloop";
 import { defaultHomepage } from "discourse/lib/utilities";
 import DiscourseURL from "discourse/lib/url";
-import { action } from "@ember/object";
+import getURL from "discourse-common/lib/get-url";
 
 const PLUGIN_ID = "Discourse-landing-page";
 
 export default {
-    name: "initializer-modify-route-login",
-    initialize() {
-        withPluginApi("0.11.0", api => {
-            api.modifyClass('route:login', {
-                pluginId: PLUGIN_ID,
-                showFooter: true,
-                beforeModel() {
-                    if (this.currentUser) {
-                        this.replaceWith(`/${defaultHomepage()}`);
-                    }
-                },
-                renderTemplate() {
-                    this.render('login');
-                },
-                afterModel(model, transition) {
-                    schedule("afterRender", () => {
-                        next(() => window.scrollTo(0, 0));
-                    });
-                }
-            })
+  name: "initializer-modify-route-login",
+  initialize() {
+    withPluginApi("0.11.0", (api) => {
+      api.modifyClass("route:login", {
+        pluginId: PLUGIN_ID,
+        showFooter: true,
+        beforeModel() {
+          if (this.currentUser) {
+            this.replaceWith(`/${defaultHomepage()}`);
+          }
+        },
+        renderTemplate() {
+          this.render("login");
+        },
+        afterModel() {
+          schedule("afterRender", () => {
+            next(() => window.scrollTo(0, 0));
+          });
+        },
+      });
 
-            api.modifyClass('route:signup', {
-                pluginId: PLUGIN_ID,
-                showFooter: true,
-                beforeModel() {
-                    if (this.currentUser) {
-                        this.replaceWith(`/${defaultHomepage()}`);
-                    }
-                },
-                renderTemplate() {
-                    this.render('create-account');
-                },
-                afterModel(model, transition) {
-                    schedule("afterRender", () => {
-                        next(() => window.scrollTo(0, 0));
-                    });
-                }
-            })
+      api.modifyClass("route:signup", {
+        pluginId: PLUGIN_ID,
+        showFooter: true,
+        beforeModel() {
+          if (this.currentUser) {
+            this.replaceWith(`/${defaultHomepage()}`);
+          }
+        },
+        renderTemplate() {
+          this.render("create-account");
+        },
+        afterModel() {
+          schedule("afterRender", () => {
+            next(() => window.scrollTo(0, 0));
+          });
+        },
+      });
 
-            api.modifyClass('route:forgot-password', {
-                pluginId: PLUGIN_ID,
-                showFooter: true,
-                beforeModel() {
-                    if (this.currentUser) {
-                        this.replaceWith(`/${defaultHomepage()}`);
-                    }
-                },
-                renderTemplate() {
-                    this.render('forgot-password');
-                },
-                afterModel(model, transition) {
-                    schedule("afterRender", () => {
-                        next(() => window.scrollTo(0, 0));
-                    });
-                }
-            })
+      api.modifyClass("route:forgot-password", {
+        pluginId: PLUGIN_ID,
+        showFooter: true,
+        beforeModel() {
+          if (this.currentUser) {
+            this.replaceWith(`/${defaultHomepage()}`);
+          }
+        },
+        renderTemplate() {
+          this.render("forgot-password");
+        },
+        afterModel() {
+          schedule("afterRender", () => {
+            next(() => window.scrollTo(0, 0));
+          });
+        },
+      });
 
-            api.modifyClass('route:application', {
-                pluginId: PLUGIN_ID,
+      api.modifyClass("route:application", {
+        pluginId: PLUGIN_ID,
 
-                handleShowLogin() {
-                    if (this.siteSettings.enable_discourse_connect) {
-                        const returnPath = encodeURIComponent(window.location.pathname);
-                        window.location = getURL("/session/sso?return_path=" + returnPath);
-                    } else {
-                        DiscourseURL.routeTo(`/login`);
-                        this.controllerFor("login").setProperties({
-                            showLoginForm: true,
-                        });
-                    }
-                },
-            })
+        handleShowLogin() {
+          if (this.siteSettings.enable_discourse_connect) {
+            const returnPath = encodeURIComponent(window.location.pathname);
+            window.location = getURL("/session/sso?return_path=" + returnPath);
+          } else {
+            DiscourseURL.routeTo(`/login`);
+            this.controllerFor("login-page").setProperties({
+              isShowLoginForm: true,
+            });
+          }
+        },
 
-            api.modifyClass('controller:login', {
-                pluginId: PLUGIN_ID,
-                showLoginForm: false,
+        handleShowCreateAccount() {
+          if (this.siteSettings.enable_discourse_connect) {
+            const returnPath = encodeURIComponent(window.location.pathname);
+            window.location = getURL("/session/sso?return_path=" + returnPath);
+          } else {
+            DiscourseURL.routeTo(`/signup`);
+          }
+        },
+      });
 
-                @action
-                handleForgotPassword(event) {
-                    event?.preventDefault();
-                    const forgotPasswordController = this.forgotPassword;
-                    if (forgotPasswordController) {
-                        forgotPasswordController.set("accountEmailOrUsername", this.loginName);
-                    }
-                    DiscourseURL.routeTo(`/password-reset`);
-                },
-            })
-        });
-    }
-}
+      api.modifyClass("controller:login-page", {
+        pluginId: PLUGIN_ID,
+
+        isShowLoginForm: false,
+      });
+    });
+  },
+};
