@@ -74,8 +74,17 @@ export default {
           } else {
             DiscourseURL.routeTo(`/login`);
             this.controllerFor("login-page").setProperties({
-                isShowLoginForm: true,
+              isShowLoginForm: true,
             });
+          }
+        },
+
+        handleShowCreateAccount() {
+          if (this.siteSettings.enable_discourse_connect) {
+            const returnPath = encodeURIComponent(window.location.pathname);
+            window.location = getURL("/session/sso?return_path=" + returnPath);
+          } else {
+            DiscourseURL.routeTo(`/signup`);
           }
         },
       });
