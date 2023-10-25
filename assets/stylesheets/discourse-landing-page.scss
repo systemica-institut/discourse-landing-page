@@ -512,6 +512,13 @@
         background: #005859;
         border-radius: 28px;
       }
+
+      .flash-warning {
+        color: var(--danger);
+        font-size: var(--font-down-1);
+        font-weight: bold;
+        margin-bottom: 1.4em;
+      }
     }
   }
 }

@@ -11,7 +11,9 @@ export default class extends Login {
       "controller:forgot-password"
     );
     if (forgotPasswordController) {
-      forgotPasswordController.set("accountEmailOrUsername", this.loginName);
+      forgotPasswordController.set("model", {
+        emailOrUsername: this.loginName
+      });
     }
     DiscourseURL.routeTo(`/password-reset`);
   }
