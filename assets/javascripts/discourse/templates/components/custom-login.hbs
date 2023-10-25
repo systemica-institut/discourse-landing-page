@@ -1,0 +1,48 @@
+{{#if @isShowLoginForm}}
+  <div class="landing-page-login-wrapper">
+    <PluginOutlet @name="login-before-modal-body" @connectorTagName="div" />
+    {{#if this.canLoginLocal}}
+      <div class="login-side">
+        <div class="header">{{i18n "login.title"}}</div>
+        <CustomLoginForm
+          @loginName={{this.loginName}}
+          @loginNameChanged={{this.loginNameChanged}}
+          @canLoginLocalWithEmail={{this.canLoginLocalWithEmail}}
+          @loginPassword={{this.loginPassword}}
+          @secondFactorMethod={{this.secondFactorMethod}}
+          @secondFactorToken={{this.secondFactorToken}}
+          @backupEnabled={{this.backupEnabled}}
+          @securityKeyAllowedCredentialIds={{this.securityKeyAllowedCredentialIds}}
+          @securityKeyChallenge={{this.securityKeyChallenge}}
+          @showSecurityKey={{this.showSecurityKey}}
+          @otherMethodAllowed={{this.otherMethodAllowed}}
+          @showSecondFactor={{this.showSecondFactor}}
+          @handleForgotPassword={{this.handleForgotPassword}}
+          @login={{this.login}}
+          @flashChanged={{this.flashChanged}}
+          @flashTypeChanged={{this.flashTypeChanged}}
+          @securityKeyCredentialChanged={{this.securityKeyCredentialChanged}}
+          @flash={{this.flash}}
+          @flashType={{this.flashType}}
+        />
+        {{#unless this.showSecurityKey}}
+          <DButton
+            @action={{action "login"}}
+            @id="login-button"
+            @form="login-form"
+            @label={{this.loginButtonLabel}}
+            @disabled={{this.loginDisabled}}
+            @class="btn btn-large btn-primary"
+            @tabindex="2"
+          />
+        {{/unless}}
+        <ConditionalLoadingSpinner
+          @condition={{this.showSpinner}}
+          @size="small"
+        />
+      </div>
+    {{/if}}
+    <PluginOutlet @name="login-after-modal-footer" @connectorTagName="div" />
+    <div class={{this.alertClass}} id="login-alert">{{this.alert}}</div>
+  </div>
+{{/if}}
