@@ -1,7 +1,7 @@
 import Login from "discourse/components/modal/login";
 import DiscourseURL from "discourse/lib/url";
 import { action } from "@ember/object";
-import { getOwner } from "discourse-common/lib/get-owner";
+import { getOwner } from "@ember/application";
 
 export default class extends Login {
   @action
@@ -12,7 +12,7 @@ export default class extends Login {
     );
     if (forgotPasswordController) {
       forgotPasswordController.set("model", {
-        emailOrUsername: this.loginName
+        emailOrUsername: this.loginName,
       });
     }
     DiscourseURL.routeTo(`/password-reset`);
