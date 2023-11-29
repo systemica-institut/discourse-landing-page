@@ -13,14 +13,12 @@ export default {
     withPluginApi("0.11.0", (api) => {
       api.modifyClass("route:login", {
         pluginId: PLUGIN_ID,
+
         showFooter: true,
         beforeModel() {
           if (this.currentUser) {
             this.replaceWith(`/${defaultHomepage()}`);
           }
-        },
-        renderTemplate() {
-          this.render("login");
         },
         afterModel() {
           schedule("afterRender", () => {
@@ -31,14 +29,12 @@ export default {
 
       api.modifyClass("route:signup", {
         pluginId: PLUGIN_ID,
+
         showFooter: true,
         beforeModel() {
           if (this.currentUser) {
             this.replaceWith(`/${defaultHomepage()}`);
           }
-        },
-        renderTemplate() {
-          this.render("create-account");
         },
         afterModel() {
           schedule("afterRender", () => {
@@ -49,14 +45,12 @@ export default {
 
       api.modifyClass("route:forgot-password", {
         pluginId: PLUGIN_ID,
+
         showFooter: true,
         beforeModel() {
           if (this.currentUser) {
             this.replaceWith(`/${defaultHomepage()}`);
           }
-        },
-        renderTemplate() {
-          this.render("forgot-password");
         },
         afterModel() {
           schedule("afterRender", () => {
@@ -86,7 +80,7 @@ export default {
           }
         },
 
-        handleShowCreateAccount(createAccountProps) {
+        handleShowCreateAccount() {
           if (this.siteSettings.enable_discourse_connect) {
             const returnPath = encodeURIComponent(window.location.pathname);
             window.location = getURL("/session/sso?return_path=" + returnPath);
@@ -98,19 +92,9 @@ export default {
               });
             } else {
               DiscourseURL.routeTo(`/signup`);
-              console.log("createAccountProps", createAccountProps);
-              this.controllerFor("signup").setProperties({
-                model: createAccountProps,
-              });
             }
           }
         },
-      });
-
-      api.modifyClass("controller:signup", {
-        pluginId: PLUGIN_ID,
-
-        model: {},
       });
     });
   },
