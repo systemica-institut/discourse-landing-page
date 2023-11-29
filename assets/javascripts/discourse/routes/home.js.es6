@@ -1,5 +1,5 @@
-import DiscourseRoute from 'discourse/routes/discourse';
 import { defaultHomepage } from "discourse/lib/utilities";
+import DiscourseRoute from 'discourse/routes/discourse';
 
 export default DiscourseRoute.extend({
   showFooter: true,
@@ -8,7 +8,4 @@ export default DiscourseRoute.extend({
       this.replaceWith(`/${defaultHomepage()}`);
     }
   },
-  renderTemplate() {
-    this.render('home');
-  }
 });

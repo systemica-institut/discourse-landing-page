@@ -1,12 +1,12 @@
 <form id="login-form" method="post">
   <div id="credentials" class={{this.credentialsClass}}>
-    <div class="input-group">
+    <div class="input-group" {{did-insert this.passkeyConditionalLogin}}>
       <Input
         @value={{@loginName}}
         @type="email"
         id="login-account-name"
         class={{value-entered @loginName}}
-        autocomplete="username"
+        autocomplete={{if @canUsePasskeys "username webauthn" "username"}}
         autocorrect="off"
         autocapitalize="off"
         disabled={{@showSecondFactor}}
@@ -15,9 +15,9 @@
         {{on "input" @loginNameChanged}}
         {{on "keydown" this.loginOnEnter}}
       />
-      <label class="alt-placeholder" for="login-account-name">{{i18n
-          "login.email_placeholder"
-        }}</label>
+      <label class="alt-placeholder" for="login-account-name">
+        {{i18n "login.email_placeholder"}}
+      </label>
     </div>
     <div class="input-group">
       <PasswordField
@@ -32,15 +32,9 @@
         tabindex="1"
         {{on "keydown" this.loginOnEnter}}
       />
-      <label class="alt-placeholder" for="login-account-password">{{i18n
-          "login.password"
-        }}</label>
-
-      {{#if @flash}}
-        <div class="flash-warning">
-          {{~@flash~}}
-        </div>
-      {{/if}}
+      <label class="alt-placeholder" for="login-account-password">
+        {{i18n "login.password"}}
+      </label>
       <div class="login__password-links">
         <a
           href="/password-reset"
@@ -48,7 +42,7 @@
           tabindex="3"
           {{on "click" (fn @handleForgotPassword)}}
         >
-          {{i18n "user.second_factor.forgot_password"}}
+          {{i18n "forgot_password.action"}}
         </a>
         {{#if @loginPassword}}
           <TogglePasswordMask
@@ -60,8 +54,7 @@
       </div>
       <div class="caps-lock-warning {{unless this.capsLockOn 'hidden'}}">
         {{d-icon "exclamation-triangle"}}
-        {{i18n "login.caps_lock_warning"}}
-      </div>
+        {{i18n "login.caps_lock_warning"}}</div>
     </div>
   </div>
 </form>
