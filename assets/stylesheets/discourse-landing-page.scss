@@ -75,7 +75,7 @@
 
   #landing-page-middle {
     width: 100%;
-    margin: 40px 0;
+    padding: 40px 0;
     background-color: #f8f8f8;
   }
 
@@ -380,13 +380,10 @@
 
         label.alt-placeholder {
           color: var(--primary-medium);
-          font-size: 16px;
           font-weight: normal;
           position: absolute;
           pointer-events: none;
           box-shadow: 0 0 0 0px rgba(var(--tertiary-rgb), 0);
-          left: 1em;
-          top: -10px;
           transition: 0.2s ease all;
           -moz-transition: 0.2s ease all; /* Firefox 4 */
           -webkit-transition: 0.2s ease all; /* Safari and Chrome */
@@ -397,6 +394,13 @@
           display: flex;
           margin-bottom: 5px;
           align-items: flex-start;
+
+          z-index: 999;
+          top: -8px;
+          left: 1em;
+          background-color: var(--secondary);
+          padding: 0 0.25em 0 0.25em;
+          font-size: var(--font-down-1);
         }
       }
 

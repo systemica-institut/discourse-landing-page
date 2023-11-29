@@ -1,7 +1,8 @@
-import { withPluginApi } from "discourse/lib/plugin-api";
 import { next, schedule } from "@ember/runloop";
-import { defaultHomepage } from "discourse/lib/utilities";
+import cookie from "discourse/lib/cookie";
+import { withPluginApi } from "discourse/lib/plugin-api";
 import DiscourseURL from "discourse/lib/url";
+import { defaultHomepage } from "discourse/lib/utilities";
 import getURL from "discourse-common/lib/get-url";
 
 const PLUGIN_ID = "Discourse-landing-page";
@@ -69,30 +70,47 @@ export default {
 
         handleShowLogin() {
           if (this.siteSettings.enable_discourse_connect) {
-            const returnPath = encodeURIComponent(window.location.pathname);
+            const returnPath = cookie("destination_url")
+              ? getURL("/")
+              : encodeURIComponent(window.location.pathname);
             window.location = getURL("/session/sso?return_path=" + returnPath);
           } else {
-            DiscourseURL.routeTo(`/login`);
-            this.controllerFor("login-page").setProperties({
-              isShowLoginForm: true,
-            });
+            if (this.isOnlyOneExternalLoginMethod) {
+              this.login.externalLogin(this.externalLoginMethods[0]);
+            } else {
+              DiscourseURL.routeTo(`/login`);
+              this.controllerFor("login-page").setProperties({
+                isShowLoginForm: true,
+              });
+            }
           }
         },
 
-        handleShowCreateAccount() {
+        handleShowCreateAccount(createAccountProps) {
           if (this.siteSettings.enable_discourse_connect) {
             const returnPath = encodeURIComponent(window.location.pathname);
             window.location = getURL("/session/sso?return_path=" + returnPath);
           } else {
-            DiscourseURL.routeTo(`/signup`);
+            if (this.isOnlyOneExternalLoginMethod) {
+              // we will automatically redirect to the external auth service
+              this.login.externalLogin(this.externalLoginMethods[0], {
+                signup: true,
+              });
+            } else {
+              DiscourseURL.routeTo(`/signup`);
+              console.log("createAccountProps", createAccountProps);
+              this.controllerFor("signup").setProperties({
+                model: createAccountProps,
+              });
+            }
           }
         },
       });
 
-      api.modifyClass("controller:login-page", {
+      api.modifyClass("controller:signup", {
         pluginId: PLUGIN_ID,
 
-        isShowLoginForm: false,
+        model: {},
       });
     });
   },

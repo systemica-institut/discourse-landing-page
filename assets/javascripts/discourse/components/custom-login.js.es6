@@ -1,7 +1,7 @@
+import { getOwner } from "@ember/application";
+import { action } from "@ember/object";
 import Login from "discourse/components/modal/login";
 import DiscourseURL from "discourse/lib/url";
-import { action } from "@ember/object";
-import { getOwner } from "@ember/application";
 
 export default class extends Login {
   @action
